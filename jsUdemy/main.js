@@ -382,3 +382,147 @@
 //         console.log("Hello");
 //     }
 // });
+
+
+// 021 Параметры документа, окна и работа с ними !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+// let box = document.querySelector(".box"),
+//     btn = document.querySelector("button");
+
+// let width = box.clientWidth,
+//     height = box.clientHeight;
+// let width = box.offsetWidth,
+//     height = box.offsetHeight;
+// let width = box.scrollWidth,
+//     height = box.scrollHeight;
+
+// console.log(width);
+// console.log(height);
+// console.log(box.getBoundingClientRect().left);
+
+// console.log(document.documentElement.clientWidth);
+// console.log(document.documentElement.clientHeight);
+// console.log(document.documentElement.scrollTop);
+
+// document.documentElement.scrollTop = 0; //!!!!!!!!!!!!!!!!!!!
+
+// btn.addEventListener("click", function() {
+//     // box.style.height = box.scrollHeight + "px";
+//     // console.log(box.scrollTop);
+//     box.scrollTop = 0;
+// });
+
+// scrollBy(0, 200); //!!!!!!!!!!!!!!!!!!!!!
+// scrollTo(0, 200); //!!!!!!!!!!!!!!!!!!!!!
+
+
+// 022 Конструкторы и классы!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+// ES 5 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// function User(name, id) {
+//     this.name = name;
+//     this.id = id;
+//     this.human = true;
+//     this.hello = function() {
+//         console.log("Hello! " + this.name);
+//     };
+// }
+// User.prototype.exit = function(name) {
+//     console.log("Пользователь " + this.name + " ушел");
+// };
+
+// let ivan = new User("Ivan", 25),
+//     alex = new User("Alex", 20);
+
+// console.log(ivan);
+// console.log(alex);
+
+// ivan.exit();
+
+
+// ES 6 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// class User {
+//     constructor(name, id) {
+//         this.name = name;
+//         this.id = id;
+//         this.human = true;
+//     }
+//     hello() {
+//         console.log(`Hello! ${this.name}`);
+//     }
+//     exit() {
+//         console.log(`Пользователь ${this.name} ушел`);
+//     }
+// }
+
+// let ivan = new User("Ivan", 23),
+//     alex = new User("Alex", 20);
+// console.log(ivan);
+// console.log(alex);
+// ivan.hello();
+// alex.hello();
+
+
+// 023 Контекст вызова (this)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+// function showThis(a, b) {
+//     console.log(this);
+//     function sum() {
+//         console.log(this);
+//         return a + b;
+//     }
+//     console.log(sum());
+// }
+// showThis(4, 5);
+// showThis(5, 5);
+
+// let obj = {
+//     a: 20,
+//     b: 15,
+//     sum: function() {
+//         console.log(this);
+//         function shout() {
+//             console.log(this);
+//         }
+//         shout();
+//     }
+// };
+// obj.sum();
+
+// let user = {
+//     name: "John"
+// };
+
+// function sayName(surname) {
+//     console.log(this);
+//     console.log(this.name + surname);
+// }
+
+// console.log(sayName.call(user, "Smith"));
+// console.log(sayName.apply(user, ["Snow"]));
+
+// function count (number) {
+//     return this * number;
+// }
+
+// let double = count.bind(2);
+// console.log(double(3));
+// console.log(double(10));
+
+// let btn = document.querySelector("button");
+
+// btn.addEventListener("click", function() {
+//     console.log(this);
+//     this.style.backgroundColor = "red";
+//     function showThis() {
+//         console.log(this);
+//     }
+//     showThis();
+// });
+
+// 1) просто вызов функции - window/undefined
+// 2) метод объекта - this = объект
+// 3) конструктор (new) - this = новый созданный объект
+// 4) указание конкретного контекста - call, apply, bind
+
+
