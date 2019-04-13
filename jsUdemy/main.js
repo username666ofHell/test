@@ -659,30 +659,220 @@
 
 // 031 AJAX !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-let inputRub = document.getElementById("rub"),
-    inputUsd = document.getElementById("usd");
+// let inputRub = document.getElementById("rub"),
+//     inputUsd = document.getElementById("usd");
 
-inputRub.addEventListener("input", () => { //стрелочная т.к. контекст вызова неважен
-    let request = new XMLHttpRequest();
+// inputRub.addEventListener("input", () => { //стрелочная т.к. контекст вызова неважен
+//     let request = new XMLHttpRequest();
 
-    // request.open(method, url, async, login, pass);
-    request.open("GET", "current.json");
-    request.setRequestHeader("Content-type", "application/json; charset=utf-8");
-    request.send();
+//     // request.open(method, url, async, login, pass);
+//     request.open("GET", "current.json");
+//     request.setRequestHeader("Content-type", "application/json; charset=utf-8");
+//     request.send();
 
-    //status код ответа сервера
-    //statusText (ok, not found)
-    //responceText (текст ответа сервера) / responce
-    //readyState
+//     //status код ответа сервера
+//     //statusText (ok, not found)
+//     //responceText (текст ответа сервера) / responce
+//     //readyState
 
-    request.addEventListener("readystatechange", function() {
-        if (request.readyState === 4 && request.status == 200) {
-            let data = JSON.parse(request.responce);
+//     request.addEventListener("readystatechange", function() {
+//         if (request.readyState === 4 && request.status == 200) {
+//             let data = JSON.parse(request.response);
 
-            inputUsd.value = inputRub.value / data.usd;
-        } else {
-            inputUsd.value = "Что-то пошло не так";
-        }
-    });
+//             inputUsd.value = inputRub.value / data.usd;
+//         } else {
+//             inputUsd.value = "Что-то пошло не так";
+//         }
+//     });
 
-});
+// });
+
+
+
+// 032 ES6. Promise !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+// пример функции не через promise
+// let drink = 0;
+
+// function shoot(arrow, headshot, fail) {
+//     console.log("Вы сделали выстрел...");
+
+//     setTimeout(function() {
+//         Math.random() > 0.5 ? headshot({}) : fail("Вы промахнулись");
+//     }, 1500);
+// }
+
+// function win() {
+//     console.log("Вы победили!");
+//     (drink == 1) ? buyBeer() : giveMoney();
+// }
+
+// function buyBeer() {
+//     console.log("Вам купили пиво");
+// }
+
+// function giveMoney() {
+//     console.log("Вам заплатили!");
+// }
+
+// function lose() {
+//     console.log("Вы проиграли!");
+// }
+
+// shoot({}, 
+//         function(mark) {
+//             console.log("Вы попали в цель!");
+//             win(mark, buyBeer, giveMoney);
+//         },
+//         function(miss) {
+//             console.error(miss);
+//             lose();
+//         }
+//     );
+
+
+// пример через promise
+// let drink = 0;
+
+// function shoot(arrow) {
+//     console.log("Вы сделали выстрел...");
+//     let promise = new Promise(function(resolve, reject) {
+//         setTimeout(function() {
+//             Math.random() > 0.5 ? resolve({}) : reject("Вы промахнулись");
+//         }, 1500);
+//     });
+
+//     return promise;
+// }
+
+// function win() {
+//     console.log("Вы победили!");
+//     (drink == 1) ? buyBeer() : giveMoney();
+// }
+
+// function buyBeer() {
+//     console.log("Вам купили пиво");
+// }
+
+// function giveMoney() {
+//     console.log("Вам заплатили!");
+// }
+
+// function lose() {
+//     console.log("Вы проиграли!");
+// }
+
+// shoot({})
+//         .then(mark => console.log("Вы попали в цель!"))
+//         .then(win)
+//         .catch(lose);
+
+
+
+// 033 Как сохранить данные без БД. Работа с localStorage !!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+// localStorage.setItem("number", 1);
+
+// console.log(localStorage.getItem("number"));
+
+// localStorage.removeItem("number");
+
+// localStorage.clear();
+
+// window.addEventListener("DOMContentLoaded", function() {
+
+//     let checkbox = document.getElementById("rememberMe"),
+//         change = document.getElementById("change"),
+//         form = document.getElementsByTagName("form")[0];
+
+//     if(localStorage.getItem("isChecked") === "true") {
+//         checkbox.checked = true;
+//     }
+
+//     if(localStorage.getItem("bg") === "changed") {
+//         form.style.backgroundColor = "#ff4766";
+//     }
+
+//     checkbox.addEventListener("click", function() {
+//         localStorage.setItem("isChecked", true);
+//     });
+
+//     change.addEventListener("click", function() {
+//         localStorage.setItem("bg", "changed");
+//         form.style.backgroundColor = "#ff4766";
+//     });
+
+// });
+
+// let person = {
+//     name: "Alex",
+//     age: 25,
+//     tech: ["mobile", "notebook"]
+// };
+
+// let serializedPerson = JSON.stringify(person);
+// localStorage.setItem("Alex", serializedPerson);
+
+// console.log(JSON.parse(localStorage.getItem("Alex")));
+
+
+
+// 034 Ошибки. Как избежать “поломки” своего кода !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+// let json = '{"id":2}';
+
+// try {
+//     // console.log("Начинаем работу");
+//     // console.log(a);
+//     // console.log("Результат");
+
+//     let user = JSON.parse(json);
+//     console.log(user);
+
+//     if(!user.name) {
+//         throw new Error("В этих данных нет имени");
+//     }
+// } catch(error) {
+//     console.log(error.name);
+//     console.log(error.message);
+//     console.log(error.stack);
+
+//     console.log(`Мы получили ошибку: ${error.name}`);
+// } finally {
+//     console.log("А я выполнюсь всегда");
+// }
+
+// console.log("А я буду работать дальше");
+
+
+
+// 035 Современные библиотеки и фрэймворки. JQuery, как устроена $ !!!!!!!!!!!!!
+
+// $(document).ready(function() {
+//     $(".list-item:first").hover(function() {
+//         $(this).toggleClass("active");
+//     });
+
+//     $(".list-item:eq(2)").on("click", function() {
+//         $(".image:even").fadeToggle("slow");
+//     });
+
+//     $(".list-item:eq(4)").on("click", function() {
+//         $(".image:odd").animate(
+//             {
+//                 opacity: "toggle",
+//                 height: "toggle"
+//             }, 3000
+//         );
+//     });
+// });
+
+// Почему jQuery можно спокойно заменить нативным js
+// document.querySelectorAll(".list-item").forEach();
+// .classList
+// .addEventListener
+// $.ajax - fetch
+// animations
+
